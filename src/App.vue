@@ -7,23 +7,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-
-const user = ref(null);
+import { onMounted } from 'vue';
 
 onMounted(() => {
   if (window.Telegram && window.Telegram.WebApp) {
-    // مقداردهی اولیه API تلگرام
+    // مقداردهی اولیه WebApp API
     window.Telegram.WebApp.ready();
-    // گرفتن اطلاعات کاربر
-    user.value = window.Telegram.WebApp.initDataUnsafe.user;
+    console.log("Telegram WebApp API initialized.");
+  } else {
+    console.error("Telegram WebApp API not available.");
   }
 });
-
-const sendData = () => {
-  // ارسال داده به تلگرام
-  if (window.Telegram && window.Telegram.WebApp) {
-    window.Telegram.WebApp.sendData("Hello from Vue 3!");
-  }
-};
 </script>
+
